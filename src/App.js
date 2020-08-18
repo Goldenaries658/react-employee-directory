@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Container, Button } from '@material-ui/core/';
+import { Container } from '@material-ui/core/';
 import EmployeeTable from './components/EmployeeTable';
 import AppBar from './components/AppBar';
+import SearchBar from './components/SearchBar';
 import Axios from 'axios';
 
 export default function App() {
-  const [employees, setEmployees] = useState([]);
+  const [employees, setEmployees] = useState([]); // The full list of employees for resetting searches
+  const [filteredEmployees, setFilteredEmployees] = useState([]); // The list to be displayed
 
   useEffect(() => {
     // Calling placeholder api
@@ -16,6 +18,7 @@ export default function App() {
           'https://jsonplaceholder.typicode.com/users'
         );
         setEmployees(data);
+        setFilteredEmployees(data);
       } catch (err) {
         console.error(`${err} - EmployeeList.js - fetchEmployees.js`);
       }
@@ -23,45 +26,21 @@ export default function App() {
     fetchEmployees();
   }, []);
 
+  const searchEmployee = (employee) => {
+    const currentList = employee ? [employee] : employees;
+    setFilteredEmployees(currentList);
+  };
+
   return (
     <div className="App">
       <CssBaseline />
       <AppBar />
       <br />
       <Container>
-        <EmployeeTable employees={employees} />
+        <SearchBar employees={employees} searchEmployee={searchEmployee} />
+        <br />
+        <EmployeeTable employees={filteredEmployees} />
       </Container>
-      <Button
-        onClick={() => {
-          setEmployees([...employees, testEmployee]);
-        }}
-      >
-        Add {testEmployee.name}
-      </Button>
     </div>
   );
 }
-
-const testEmployee = {
-  id: 11,
-  name: 'Clementine Bauch',
-  username: 'Samantha',
-  email: 'Nathan@yesenia.net',
-  address: {
-    street: 'Douglas Extension',
-    suite: 'Suite 847',
-    city: 'McKenziehaven',
-    zipcode: '59590-4157',
-    geo: {
-      lat: '-68.6102',
-      lng: '-47.0653',
-    },
-  },
-  phone: '1-463-123-4447',
-  website: 'ramiro.info',
-  company: {
-    name: 'Romaguera-Jacobson',
-    catchPhrase: 'Face to face bifurcated interface',
-    bs: 'e-enable strategic applications',
-  },
-};
