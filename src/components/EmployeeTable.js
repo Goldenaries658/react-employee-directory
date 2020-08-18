@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import Axios from 'axios';
+import React from 'react';
 import Employee from './Employee';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
@@ -16,23 +15,8 @@ const useStyles = makeStyles({
   },
 });
 
-export default function EmployeeList() {
-  const [employees, setEmployees] = useState([]);
-
-  useEffect(() => {
-    // Calling placeholder api
-    const fetchEmployees = async () => {
-      try {
-        const { data } = await Axios(
-          'https://jsonplaceholder.typicode.com/users'
-        );
-        setEmployees(data);
-      } catch (err) {
-        console.error(`${err} - EmployeeList.js - fetchEmployees.js`);
-      }
-    };
-    fetchEmployees();
-  }, []);
+export default function EmployeeList(props) {
+  const { employees } = props;
 
   const classes = useStyles();
 
