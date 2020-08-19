@@ -9,7 +9,7 @@ export default function ComboBox(props) {
       id="combo-box-demo"
       options={employees}
       getOptionLabel={(option) => option.name}
-      style={{ width: 300 }}
+      style={{ width: 300, padding: '5px 0px' }}
       onChange={(event, value) => searchEmployee(value)}
       renderInput={(params) => (
         <TextField

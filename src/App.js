@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Container } from '@material-ui/core/';
+import { Container, createMuiTheme, ThemeProvider } from '@material-ui/core/';
 import EmployeeTable from './components/EmployeeTable';
 import AppBar from './components/AppBar';
-import SearchBar from './components/SearchBar';
-import Axios from 'axios';
+import axios from 'axios';
+
+const darkTheme = createMuiTheme({
+  palette: {
+    type: 'dark',
+  },
+});
 
 export default function App() {
   const [employees, setEmployees] = useState([]); // The full list of employees for resetting searches
@@ -18,7 +23,7 @@ export default function App() {
     // Calling placeholder api
     const fetchEmployees = async () => {
       try {
-        const { data } = await Axios(
+        const { data } = await axios(
           'https://jsonplaceholder.typicode.com/users'
         );
         setEmployees(data);
@@ -53,18 +58,20 @@ export default function App() {
   };
 
   return (
-    <div className="App">
-      <CssBaseline />
-      <AppBar />
-      <br />
-      <Container>
-        <SearchBar employees={employees} searchEmployee={searchEmployee} />
+    <ThemeProvider theme={darkTheme}>
+      <div className="App">
+        <CssBaseline />
+        <AppBar employees={employees} searchEmployee={searchEmployee} />
         <br />
-        <EmployeeTable
-          employees={filteredEmployees}
-          sortEmployees={sortEmployees}
-        />
-      </Container>
-    </div>
+        <Container>
+          {/* <SearchBar employees={employees} searchEmployee={searchEmployee} /> */}
+          <br />
+          <EmployeeTable
+            employees={filteredEmployees}
+            sortEmployees={sortEmployees}
+          />
+        </Container>
+      </div>
+    </ThemeProvider>
   );
 }
