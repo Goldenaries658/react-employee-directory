@@ -3,10 +3,11 @@ import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 export default function ComboBox(props) {
-  const { employees,  searchEmployee } = props;
+  const { employees, searchEmployee } = props;
   return (
     <Autocomplete
       id="combo-box-demo"
+      autoHighlight={true}
       options={employees}
       getOptionLabel={(option) => option.name}
       style={{ width: 300, padding: '5px 0px' }}
