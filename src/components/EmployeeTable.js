@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 });
 
 export default function EmployeeList(props) {
-  const { employees } = props;
+  const { employees, sortEmployees } = props;
 
   const classes = useStyles();
 
@@ -24,7 +24,9 @@ export default function EmployeeList(props) {
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
-          <TableRow>
+          <TableRow
+            onClick={(e) => sortEmployees(e.target.textContent.toLowerCase())}
+          >
             <TableCell>Name</TableCell>
             <TableCell align="right">Username</TableCell>
             <TableCell align="right">Email</TableCell>
@@ -33,7 +35,7 @@ export default function EmployeeList(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {employees.map((employee) => (
+          {employees.map((employee, index) => (
             <Employee key={employee.id} employee={employee} />
           ))}
         </TableBody>
