@@ -43,12 +43,11 @@ export default function App() {
   const sortEmployees = (column) => {
     const currentList = [...employees].sort((a, b) => {
       // Checking if we've sorted this col before
-      // if (lastSort.column === column) {
-        // If so and it was ascending then flip it
-        if (lastSort.column === column && lastSort.direction === 'asc') {
-          setLastSort({ column, direction: 'desc' });
-          return a[column] < b[column] ? 1 : -1;
-        }
+      // If so and it was ascending then flip it
+      if (lastSort.column === column && lastSort.direction === 'asc') {
+        setLastSort({ column, direction: 'desc' });
+        return a[column] < b[column] ? 1 : -1;
+      }
       // }
       // Otherwise sort ascending
       setLastSort({ column, direction: 'asc' });
