@@ -16,7 +16,7 @@ export default function App() {
   const [filteredEmployees, setFilteredEmployees] = useState([]); // The list to be displayed
   const [lastSort, setLastSort] = useState({
     column: null,
-    direction: null,
+    direction: '',
   }); // Tracking sorting
 
   useEffect(() => {
@@ -65,6 +65,7 @@ export default function App() {
           <EmployeeTable
             employees={filteredEmployees}
             sortEmployees={sortEmployees}
+            lastSort={lastSort}
           />
         </Container>
       </div>
