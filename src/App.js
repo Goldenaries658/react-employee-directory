@@ -47,7 +47,6 @@ export default function App() {
         setLastSort({ column, direction: 'desc' });
         return a[column] < b[column] ? 1 : -1;
       }
-      // }
       // Otherwise sort ascending
       setLastSort({ column, direction: 'asc' });
       return a[column] > b[column] ? 1 : -1;
