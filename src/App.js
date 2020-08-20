@@ -35,10 +35,9 @@ export default function App() {
     fetchEmployees();
   }, []);
 
-  const searchEmployee = (employee) => {
-    const currentList = employee ? [employee] : employees;
-    setFilteredEmployees(currentList);
-  };
+  // const currentList = employee ? [employee] : employees;
+  const searchEmployee = (employee) =>
+    setFilteredEmployees(employee ? [employee] : employees);
 
   const sortEmployees = (column) => {
     const currentList = [...employees].sort((a, b) => {
