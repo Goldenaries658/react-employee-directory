@@ -20,12 +20,17 @@ export default function App() {
   }); // Tracking sorting
 
   useEffect(() => {
+    const CancelToken = axios.CancelToken;
+    const source = CancelToken.source();
+    
     // Calling placeholder api
     const fetchEmployees = async () => {
       try {
-        const { data } = await axios(
-          'https://jsonplaceholder.typicode.com/users'
-        );
+        const {
+          data,
+        } = await axios('https://jsonplaceholder.typicode.com/users', {
+          cancelToken: source.token,
+        });
         setEmployees(data);
         setFilteredEmployees(data);
       } catch (err) {
@@ -33,6 +38,10 @@ export default function App() {
       }
     };
     fetchEmployees();
+
+    return () => {
+      source.cancel();
+    };
   }, []);
 
   // const currentList = employee ? [employee] : employees;
