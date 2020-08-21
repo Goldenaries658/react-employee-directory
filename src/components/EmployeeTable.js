@@ -50,7 +50,7 @@ export default function EmployeeList(props) {
   ];
   return (
     <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
+      <Table className={classes.table} aria-label="employee table">
         <TableHead>
           <TableRow>
             {headCells.map(({ id, name, align }) => (
@@ -66,7 +66,7 @@ export default function EmployeeList(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {employees.map((employee, index) => (
+          {employees.map((employee) => (
             <Employee key={employee.id} employee={employee} />
           ))}
         </TableBody>
