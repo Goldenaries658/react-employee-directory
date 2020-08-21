@@ -22,15 +22,16 @@ export default function App() {
   useEffect(() => {
     const CancelToken = axios.CancelToken;
     const source = CancelToken.source();
-    
+
     // Calling placeholder api
     const fetchEmployees = async () => {
       try {
-        const {
-          data,
-        } = await axios('https://jsonplaceholder.typicode.com/users', {
-          cancelToken: source.token,
-        });
+        const { data } = await axios(
+          'https://jsonplaceholder.typicode.com/users',
+          {
+            cancelToken: source.token,
+          }
+        );
         setEmployees(data);
         setFilteredEmployees(data);
       } catch (err) {
